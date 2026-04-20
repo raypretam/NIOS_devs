@@ -6,7 +6,7 @@ across Sanskrit (san_Deva), Hindi (hin_Deva), and Kannada (kan_Knda) — all 6 d
 **Dataset:** NIOS Trilingual Joint (`NIOS_Trilingual_Joint/`)
 - `train_multilingual.jsonl` / `val_multilingual.jsonl`
 - Format: `{src_lang, tgt_lang, src_text, tgt_text}` (directional JSONL)
-- ~3,900 training pairs per direction (80/20 split)
+- ~12K training pairs per direction (80/20 split)
 
 ---
 
