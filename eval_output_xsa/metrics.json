@@ -1,0 +1,38 @@
+{
+  "lora_path": "./xsa_intervention_output/lora_xsa",
+  "data": "../NIOS_Trilingual_Joint/val_multilingual.jsonl",
+  "xsa_enc": true,
+  "xsa_dec": true,
+  "scores": {
+    "San→Hin": {
+      "bleu": 31.29,
+      "chrf": 65.84,
+      "n": 100
+    },
+    "San→Kan": {
+      "bleu": 23.74,
+      "chrf": 61.28,
+      "n": 100
+    },
+    "Hin→San": {
+      "bleu": 22.9,
+      "chrf": 61.73,
+      "n": 100
+    },
+    "Hin→Kan": {
+      "bleu": 23.12,
+      "chrf": 64.36,
+      "n": 100
+    },
+    "Kan→San": {
+      "bleu": 10.56,
+      "chrf": 54.56,
+      "n": 100
+    },
+    "Kan→Hin": {
+      "bleu": 29.4,
+      "chrf": 64.9,
+      "n": 100
+    }
+  }
+}

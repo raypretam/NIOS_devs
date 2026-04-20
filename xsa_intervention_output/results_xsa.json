@@ -1,0 +1,37 @@
+{
+  "run": "xsa",
+  "xsa_enc": true,
+  "xsa_dec": true,
+  "scores": {
+    "San\u2192Hin": {
+      "bleu": 30.51,
+      "chrf": 64.9,
+      "n_test": 778
+    },
+    "San\u2192Kan": {
+      "bleu": 19.77,
+      "chrf": 57.75,
+      "n_test": 778
+    },
+    "Hin\u2192San": {
+      "bleu": 19.3,
+      "chrf": 61.72,
+      "n_test": 778
+    },
+    "Hin\u2192Kan": {
+      "bleu": 25.91,
+      "chrf": 64.39,
+      "n_test": 778
+    },
+    "Kan\u2192San": {
+      "bleu": 13.51,
+      "chrf": 56.26,
+      "n_test": 778
+    },
+    "Kan\u2192Hin": {
+      "bleu": 31.4,
+      "chrf": 64.44,
+      "n_test": 778
+    }
+  }
+}
