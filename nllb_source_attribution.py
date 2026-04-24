@@ -84,7 +84,7 @@ def compute_sample_metrics(model, tokenizer, src_text, tgt_text,
     """
     Teacher-forced forward pass; returns dicts keyed by layer index:
       enc_content_frac[l]  — fraction of enc self-attn mass on content keys
-      dec_cross_content[l] — fraction of dec cross-attn mass on source content
+      dec_cross_frac[l] — fraction of dec cross-attn mass on source content
       dec_cross_special[l] — fraction of dec cross-attn mass on source special tokens
       dec_self_ent[l]      — entropy of dec self-attn
 
@@ -127,7 +127,7 @@ def compute_sample_metrics(model, tokenizer, src_text, tgt_text,
             return_dict=True,
         )
 
-    enc_content_frac, dec_cross_content, dec_cross_special, dec_self_ent = {}, {}, {}, {}
+    enc_content_frac, dec_cross_frac, dec_cross_special, dec_self_ent = {}, {}, {}, {}
 
     # ── Encoder self-attention ──────────────────────────────────────────
     # Shape: (1, H, T_src, T_src) — attention from each source position to all source positions
@@ -148,7 +148,7 @@ def compute_sample_metrics(model, tokenizer, src_text, tgt_text,
         A = A[0]                                                        # (H, T_tgt, T_src)
         content_frac = A[:, :, content_mask].sum(dim=-1).mean().item()  # sum content keys
         special_frac = A[:, :, special_mask].sum(dim=-1).mean().item()  # sum special keys
-        dec_cross_content[l] = content_frac
+        dec_cross_frac[l] = content_frac
         dec_cross_special[l] = special_frac
 
     # ── Decoder self-attention ──────────────────────────────────────────
@@ -156,7 +156,7 @@ def compute_sample_metrics(model, tokenizer, src_text, tgt_text,
         A = A[0]  # (H, T_tgt, T_tgt)
         dec_self_ent[l] = attn_entropy(A)
 
-    return enc_content_frac, dec_cross_content, dec_cross_special, dec_self_ent
+    return enc_content_frac, dec_cross_frac, dec_cross_special, dec_self_ent
 
 
 # ── Direction-level aggregation ────────────────────────────────────────────
@@ -198,7 +198,7 @@ def run_direction(model, tokenizer, df, src_name, tgt_name, n_samples, device, m
 
     return {
         "enc_content_frac":   mean_over_layers(run_enc),
-        "dec_cross_content":  mean_over_layers(run_cross_content),
+        "dec_cross_frac":  mean_over_layers(run_cross_content),
         "dec_cross_special":  mean_over_layers(run_cross_special),
         "dec_self_ent":       mean_over_layers(run_dec),
         "n": len(rows),
